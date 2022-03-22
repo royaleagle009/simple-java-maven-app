@@ -29,10 +29,4 @@
       state: started
       enabled: yes
   
-  - name: Start the container
-    docker-container:
-      name:  webapp
-      image: "royaleagle/webapp-${DOCKERTAG}"
-      state: started
-      published_ports:
-           - 0.0.0.0:8080:8080
+
