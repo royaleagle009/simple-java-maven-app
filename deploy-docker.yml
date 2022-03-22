@@ -1,32 +1,38 @@
 ---
 - hosts: dev
   become: True
-  Tasks:
-    -  name: Install python pip
-       yum:
-         name: python-pip
-         state: present
-         
-    -  name: Install docker
-       yum:
-         name: docker
-         state: present
-         
-    -  name: start docker
-       service:
-         name: docker
-         state: started
-         enabled: yes
-         
-    -  name: Install docker-py python module
-       pip: 
-         name: docker-py
-         state: present
-         
-    -  name: Start the container
-       docker-container:
-         name: webapp
-         image: "royaleagle/webapp-${DOCKERTAG}"
-         state: started
-         published_ports:
+  tasks:
+  - name: Install python pip
+    yum:
+      name:  python-pip
+      state: present
+
+  - name: Install docker
+    yum:
+      name:  docker
+      state: present
+
+  - name: start docker
+    yum:
+      name:  docker
+      state: started
+      enabled: yes
+  
+  - name: Install docker-py python module
+    pip:
+      name:  docker-py
+      state: present
+      
+  - name: start docker
+    yum:
+      name:  docker
+      state: started
+      enabled: yes
+  
+  - name: Start the container
+    docker-container:
+      name:  webapp
+      image: "royaleagle/webapp-${DOCKERTAG}"
+      state: started
+      published_ports:
            - 0.0.0.0:8080:8080
