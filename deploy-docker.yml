@@ -1,5 +1,5 @@
 ---
--  hosts: dev
+-  host: dev
    become: True
    Tasks:
   
